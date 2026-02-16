@@ -3,22 +3,79 @@ import './Projects.scss';
 
 const projects = [
   {
-    title: 'Telegram Bot for Audio Transcription',
-    description: 'Automated audio preprocessing with FFmpeg, chunked transcription, fallback messaging, and error logging.',
-    tech: ['Node.js', 'FFmpeg', 'Telegram API', 'OpenAI'],
-    link: '/projects/audio-bot',
+    title: 'Transcribe App',
+    description: 'Full-stack app for audio transcription: upload audio files, process them with AssemblyAI, and view transcriptions in real time via a React interface.',
+    tech: ['React', 'Vite', 'Express', 'AssemblyAI', 'Multer', 'Axios', 'dotenv'],
+    link: '/projects/transcribe-app',
   },
   {
-    title: 'Price Sniper with Puppeteer',
-    description: 'Resilient browser automation with fallback selectors, DOM state control, and anti-duplication logic.',
-    tech: ['Puppeteer', 'TypeScript', 'CI/CD', 'Telegram'],
-    link: '/projects/price-sniper',
+    title: 'SmartTender Bot',
+    description: 'Full-stack tender automation: upload Excel files via a React interface, process data with Express, and perform automated actions using Puppeteer and Telegram integration.',
+    tech: ['React', 'Vite', 'Express', 'Puppeteer', 'SQLite', 'Telegram API', 'Excel (.xlsx)'],
+    link: '/projects/smarttender-bot',
   },
   {
-    title: 'Speech Analytics MVP',
-    description: 'Architected and simplified technical scope for a speech analytics system with modular pipeline and AI integration.',
-    tech: ['React', 'Node.js', 'Whisper', 'Zod'],
-    link: '/projects/speech-analytics',
+    title: 'Telegram Product Bot',
+    description: 'Telegram bot for searching products in Google Sheets, browsing by categories and brands, and answering user questions with AI assistance (Gemini).',
+    tech: ['Node.js', 'Telegram API', 'Google Sheets API', 'AI (Gemini)', 'Axios', 'dotenv'],
+    link: '/projects/telegram-product-bot',
+  },
+  // --- QPlaze projects ---
+  {
+    title: 'QPlaze Real Checkers',
+    description: 'HTML5 online Checkers game built with real-time multiplayer logic and smooth browser performance.',
+    tech: ['HTML5', 'JavaScript', 'WebSockets', 'Game Logic'],
+    link: 'https://html5.qplaze.com/games/real_checkers/',
+  },
+  {
+    title: 'QPlaze Real Chess',
+    description: 'Interactive chess platform with real-time moves, AI integration for hints, and multiplayer functionality.',
+    tech: ['HTML5', 'JavaScript', 'Chess Engine', 'WebSockets'],
+    link: 'https://html5.qplaze.com/games/realchess/',
+  },
+  {
+    title: 'QPlaze Real Baccarat',
+    description: 'Online Baccarat game with real-time results and interactive interface for players.',
+    tech: ['HTML5', 'JavaScript', 'Game Logic', 'WebSockets'],
+    link: 'https://html5.qplaze.com/games/realBaccarat/',
+  },
+  {
+    title: 'QPlaze Tractor Mania',
+    description: 'Browser-based strategy and simulation game with interactive farm mechanics.',
+    tech: ['HTML5', 'JavaScript', 'Game Logic', 'UI/UX Design'],
+    link: 'https://html5.qplaze.com/games/tractorMania/',
+  },
+  {
+    title: 'QPlaze Idle Farm Tycoon',
+    description: 'Idle farming simulator with progressive gameplay, automation, and browser compatibility.',
+    tech: ['HTML5', 'JavaScript', 'Game Logic', 'Progressive Web App'],
+    link: 'https://html5.qplaze.com/games/idleFarmTycoon/',
+  },
+  // --- Marketplace ---
+  {
+    title: 'FDOUT Service Marketplace',
+    description: 'Marketplace for services built with Next.js, featuring user profiles, listings, and seamless UI/UX.',
+    tech: ['Next.js', 'React', 'Node.js', 'API Integration', 'Responsive Design'],
+    link: 'https://fdout.pl/uk',
+  },
+  // --- EDEV projects ---
+  {
+    title: 'Sudoku Online',
+    description: 'Web-based Sudoku game developed during PM and team lead role, coordinating developers and designers to deliver a smooth game experience.',
+    tech: ['React', 'JavaScript', 'Game Logic', 'UI/UX'],
+    link: 'https://sudoku.online/',
+  },
+  {
+    title: 'Play Solitaire',
+    description: 'Solitaire web game with multiple variants, animations, and responsive design, managed as PM and team lead.',
+    tech: ['React', 'JavaScript', 'Animations', 'Game Logic', 'UI/UX'],
+    link: 'https://playsolitaire.game/',
+  },
+  {
+    title: 'Backgammon Clash (iOS)',
+    description: 'Mobile Backgammon game published on App Store, developed under PM leadership with team coordination.',
+    tech: ['iOS', 'Unity', 'Game Design', 'Team Leadership', 'PM'],
+    link: 'https://apps.apple.com/us/app/backgammon-clash/id6754024403',
   },
 ];
 
@@ -41,7 +98,7 @@ export default function Projects() {
                   <li key={tech} className="projects__item-tag">{tech}</li>
                 ))}
               </ul>
-              <a href={project.link} className="projects__item-link">View details →</a>
+              <a href={project.link} className="projects__item-link" target="_blank" rel="noopener noreferrer">View details →</a>
             </div>
           ))}
         </div>

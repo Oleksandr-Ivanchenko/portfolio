@@ -12,8 +12,8 @@ export default function Contact() {
         <ul className="contact__list">
           <li className="contact__item">
             <strong>Email:</strong>{' '}
-            <a href="mailto:oleksandr.ivanchenko.dev@gmail.com" className="contact__link">
-              oleksandr.ivanchenko.dev@gmail.com
+            <a href="mailto:ivanchenko.dev.ua@gmail.com" className="contact__link">
+              ivanchenko.dev.ua@gmail.com
             </a>
           </li>
           <li className="contact__item">
@@ -24,8 +24,8 @@ export default function Contact() {
           </li>
           <li className="contact__item">
             <strong>Telegram:</strong>{' '}
-            <a href="https://t.me/your_username" target="_blank" className="contact__link">
-              @your_username
+            <a href="https://t.me/IvAlxndr" target="_blank" className="contact__link">
+              @IvAlxndr
             </a>
           </li>
         </ul>
