@@ -7,44 +7,46 @@
 
 # My Portfolio
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Portfolio-blue)](https://oleksandr-ivanchenko.github.io/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Portfolio-blue)](https://oleksandr-ivanchenko.github.io/portfolio/)
 
-
----
-
-## 🌟 О проекте
-
-Это современное персональное портфолио, реализованное на **Full Stack JavaScript**.  
-Проект состоит из двух частей:  
-
-- **Server** – backend на Node.js + Express, предоставляет API для проектов и формы контакта.  
-- **Client** – frontend на React + Vite, отображает проекты и контакты.  
 
 
 ---
 
-## 📂 Структура проекта
+## 🌟 About the Project
+
+This is a modern personal portfolio built with **Full Stack JavaScript**.  
+The project consists of two parts:
+
+- **Server** – backend built with Node.js + Express, provides API for projects and contact form.  
+- **Client** – frontend built with React + Vite, displays projects and contact information.
+
+---
+
+## 📂 Project Structure
 
 portfolio/
 ├─ server/ # Backend (Node.js + Express)
 ├─ client/ # Frontend (React + Vite)
 
 
-## ⚡ Технологии
+## ⚡ Technologies
 
 - 💻 Node.js, Express  
 - ⚛️ React, Vite  
 - 🌐 HTML5, CSS3, JavaScript  
 - 🐳 Docker  
 
-## Установка и запуск
+---
+## Installation & Running
 
-### Сервер
-```bash
+### Backend
 cd server
 npm install
 npm run dev
 
+
+### Frontend
 cd client
 npm install
 npm run dev
