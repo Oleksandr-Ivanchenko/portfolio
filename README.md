@@ -7,7 +7,8 @@
 
 # My Portfolio
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Portfolio-blue)](https://oleksandr-ivanchenko.github.io/portfolio/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Portfolio-blue?style=for-the-badge)](https://oleksandr-ivanchenko.github.io/portfolio/)
+
 
 
 
