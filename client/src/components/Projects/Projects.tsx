@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './Projects.scss';
 
 const projects = [
@@ -85,7 +85,7 @@ export default function Projects() {
       <div className="projects__container">
         <h1 className="projects__title">Projects</h1>
         <p className="projects__intro">
-          Here are some of the systems I've built or architected — focused on automation, resilience, and clarity.
+          {/* Here are some of the systems I've built or architected — focused on automation, resilience, and clarity. */}
         </p>
 
         <div className="projects__list">
