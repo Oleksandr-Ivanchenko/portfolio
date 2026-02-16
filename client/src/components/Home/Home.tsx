@@ -1,5 +1,6 @@
 
 import './Home.scss';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
@@ -12,8 +13,8 @@ export default function Home() {
         </p>
 
         <div className="home__actions">
-          <a href="/projects" className="home__button">View Projects</a>
-          <a href="/contact" className="home__button home__button--secondary">Contact Me</a>
+          <Link to="/projects" className="home__button">View Projects</Link>
+          <Link to="/contact" className="home__button home__button--secondary">Contact Me</Link>
         </div>
       </div>
     </main>
