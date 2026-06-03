@@ -6,7 +6,8 @@ const projects = [
     description:
       "Full-stack app for audio transcription: upload audio files, process them with AssemblyAI, and view transcriptions in real time via a React interface.",
     tech: ["React", "Vite", "Express", "AssemblyAI", "Multer", "Axios"],
-    link: "/projects/transcribe-app",
+  link: "/projects/transcribe-app",
+  comingSoon: true,
     number: "01",
     category: "Full-Stack",
     accent: "#4ECDC4",
@@ -16,7 +17,8 @@ const projects = [
     description:
       "Full-stack tender automation: upload Excel files via a React interface, process data with Express, and perform automated actions using Puppeteer and Telegram integration.",
     tech: ["React", "Vite", "Express", "Puppeteer", "SQLite", "Telegram API"],
-    link: "/projects/smarttender-bot",
+  link: "/projects/smarttender-bot",
+  comingSoon: true,
     number: "02",
     category: "Automation",
     accent: "#FF6B6B",
@@ -26,7 +28,8 @@ const projects = [
     description:
       "Telegram bot for searching products in Google Sheets, browsing by categories and brands, and answering user questions with AI assistance (Gemini).",
     tech: ["Node.js", "Telegram API", "Google Sheets API", "AI (Gemini)", "Axios"],
-    link: "/projects/telegram-product-bot",
+  link: "/projects/telegram-product-bot",
+  comingSoon: true,
     number: "03",
     category: "AI / Bot",
     accent: "#A78BFA",
@@ -145,26 +148,69 @@ function useInView<T extends Element = HTMLElement>(threshold = 0.15): [import('
 }
 
 function ProjectCard({ project, index }: Readonly<{ project: typeof projects[number]; index: number }>) {
-  const [ref, inView] = useInView<HTMLAnchorElement>(0.1);
+  const [ref, inView] = useInView<HTMLElement>(0.1);
   const [hovered, setHovered] = useState(false);
+  const sharedStyle = {
+    display: "block",
+    textDecoration: "none",
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0) scale(1)" : "translateY(60px) scale(0.97)",
+    transition: `opacity 0.7s cubic-bezier(.16,1,.3,1) ${index * 60}ms, transform 0.7s cubic-bezier(.16,1,.3,1) ${index * 60}ms`,
+  } as const;
+
+  // For coming-soon items we render an anchor-like card but disable navigation
+  // — keep markup close to the regular card so styles remain consistent.
+
+  if (project.comingSoon) {
+    return (
+      <a
+        // intentionally no href to avoid navigation
+        ref={ref as import('react').RefObject<HTMLAnchorElement>}
+        onClick={(e) => e.preventDefault()}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        aria-disabled={true}
+        tabIndex={-1}
+        style={{ ...sharedStyle, cursor: 'default', textDecoration: 'none' }}
+      >
+        <div
+          style={{
+            position: "relative",
+            background: hovered ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.025)",
+            border: `1px solid ${hovered ? project.accent + "55" : "rgba(255,255,255,0.07)"}`,
+            borderRadius: "20px",
+            padding: "36px 36px 32px",
+          }}
+        >
+          <div style={{ position: 'absolute', top: 16, right: 16 }}>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, background: 'rgba(255,255,255,0.06)', padding: '4px 8px', borderRadius: 8 }}>{'Coming soon'}</span>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: project.accent, opacity: 0.8 }}>{project.number} — {project.category}</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ opacity: hovered ? 1 : 0.3, transition: 'all 0.3s ease', transform: hovered ? 'translate(2px, -2px)' : 'translate(0,0)' }}>
+              <path d="M3 13L13 3M13 3H6M13 3V10" stroke={project.accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+
+          <h2 style={{ margin: '0 0 12px', fontFamily: "'Syne', sans-serif", fontSize: 'clamp(18px, 2.2vw, 24px)', fontWeight: 700, color: '#FAFAFA' }}>{project.title}</h2>
+
+          <p style={{ margin: '0 0 24px', fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: 'rgba(255,255,255,0.45)' }}>{project.description}</p>
+
+        </div>
+      </a>
+    );
+  }
 
   return (
     <a
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      ref={ref}
+      ref={ref as import('react').RefObject<HTMLAnchorElement>}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        display: "block",
-        textDecoration: "none",
-        opacity: inView ? 1 : 0,
-        transform: inView
-          ? "translateY(0) scale(1)"
-          : "translateY(60px) scale(0.97)",
-        transition: `opacity 0.7s cubic-bezier(.16,1,.3,1) ${index * 60}ms, transform 0.7s cubic-bezier(.16,1,.3,1) ${index * 60}ms`,
-      }}
+      style={sharedStyle}
     >
       <div
         style={{
