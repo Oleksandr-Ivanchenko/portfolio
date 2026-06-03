@@ -11,10 +11,11 @@ import Experience from "./components/Experience/Experience";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export default function App() {
+  const basename = import.meta.env.BASE_URL || '/';
+
   return (
-    <Router basename="/portfolio">
+    <Router basename={basename}>
       <Header />
-      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -23,7 +24,6 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/experience" element={<Experience />} />
       </Routes>
-
       <Footer />
     </Router>
   );

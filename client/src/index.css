@@ -1,0 +1,25 @@
+/* Global resets to avoid default body margins creating a visible white edge */
+html, body, #root {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* sensible defaults */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* If a page component sets its own background (dark theme), let it show full-bleed.
+	 Removing the default body margin removes the white border around pages. */
+
+/* When the mobile menu opens, push the main app content down so the menu doesn't
+	 simply overlay everything. We toggle `body.menu-open` from the Header component. */
+body.menu-open #root > *:not(.header) {
+	transform: translateY(var(--header-h, 64px));
+	transition: transform 0.28s ease;
+}
+
+/* Make sure transforms on these elements default to none */
+#root > *:not(.header) {
+	transform: none;
+}
+

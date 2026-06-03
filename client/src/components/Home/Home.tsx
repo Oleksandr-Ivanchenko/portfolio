@@ -1,10 +1,19 @@
 
 import './Home.scss';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+  
+    const t = setTimeout(() => setMounted(true), 20);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
-    <main className="home">
+    <main className={"home" + (mounted ? ' home--mounted' : '')}>
       <div className="home__container">
         <h1 className="home__title">Oleksandr Ivanchenko</h1>
         <h2 className="home__subtitle">System-minded Fullstack Engineer</h2>
@@ -13,7 +22,7 @@ export default function Home() {
         </p>
 
         <div className="home__actions">
-          <Link to="/projects" className="home__button">View Projects</Link>
+          <Link to="/projects" className="home__button home__button--primary">View Projects</Link>
           <Link to="/contact" className="home__button home__button--secondary">Contact Me</Link>
         </div>
       </div>

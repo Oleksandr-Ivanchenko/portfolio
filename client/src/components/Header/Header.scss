@@ -1,90 +1,409 @@
-.header {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #ddd;
-  padding: 1rem;
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+
+// ─── Tokens ──────────────────────────────────────────────
+:root {
+  --color-bg:      #080C10;
+  --color-surface: rgba(255,255,255,0.03);
+  --color-border:  rgba(255,255,255,0.07);
+  --color-text:    #FAFAFA;
+  --color-muted:   rgba(255,255,255,0.38);
+  --color-teal:    #4ECDC4;
+  --color-purple:  #A78BFA;
+  --font-display:  'Syne', sans-serif;
+  --font-body:     'DM Sans', sans-serif;
+  --font-mono:     'DM Mono', monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --header-h:      72px;
 }
 
-.header__container {
-  max-width: 1200px;
-  margin: 0 auto;
+// ─── Keyframes ───────────────────────────────────────────
+@keyframes headerSlideDown {
+  from { opacity: 0; transform: translateY(-100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes navLinkIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mobileItemIn {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+// ─── Block ───────────────────────────────────────────────
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-h);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
 
-.header__logo {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-}
+  // FIX 1: хедер всегда виден — animation fills both направление
+  // opacity: 0 убран, используем animation-fill-mode: both
+  animation: headerSlideDown 0.7s var(--ease-out-expo) 0.05s both;
 
-.header__burger {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+  border-bottom: 1px solid transparent;
+  transition:
+    height          0.35s var(--ease-out-expo),
+    background      0.35s ease,
+    border-color    0.35s ease,
+    backdrop-filter 0.35s ease;
 
-.header__burger-line {
-  width: 24px;
-  height: 2px;
-  background-color: #333;
-}
-
-.header__nav {
-  display: flex;
-}
-
-.header__nav-list {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.header__nav-item {}
-
-.header__nav-link {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.header__nav-link:hover {
-  color: #007bff;
-}
-
-.header__nav-link--active {
-  color: #007bff;
-  font-weight: bold;
-}
-
-@media (max-width: 768px) {
-  .header__burger {
-    display: flex;
+  // ── Scrolled ─────────────────────────────────────────
+  &--scrolled {
+    --header-h: 58px;
+    background: rgba(8, 12, 16, 0.88);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border-bottom-color: var(--color-border);
   }
 
-  .header__nav {
-    display: none;
+  // ── Mobile menu open ─────────────────────────────────
+  &--open {
+    background: var(--color-bg) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  // ── Inner ────────────────────────────────────────────
+  &__inner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    // FIX 2: убран translateX(10px) — сдвигал весь хедер вправо
+    padding: 0 clamp(20px, 4vw, 60px);
+  }
+
+  // ── Logo ─────────────────────────────────────────────
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+    margin-right: auto;
+  }
+
+  &__logo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-teal);
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ease-out-expo);
+
+    .header__logo:hover & {
+      transform: scale(1.6);
+    }
+  }
+
+  &__logo-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+
+    .header__logo:hover & {
+      color: var(--color-teal);
+    }
+  }
+
+  &__logo-role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    padding: 2px 7px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  // ── Desktop nav ──────────────────────────────────────
+  &__nav {
+    display: flex;
+    align-items: center;
+  }
+
+  &__nav-list {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__nav-item {
+    opacity: 1;
+
+    .header--mounted & {
+      animation: navLinkIn 0.5s var(--ease-out-expo) both;
+
+      @for $i from 1 through 6 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{0.1 + $i * 0.05}s;
+        }
+      }
+    }
+  }
+
+  &__nav-link {
+    position: relative;
+    display: block;
+    padding: 8px 13px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-muted);
+    text-decoration: none;
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: color 0.2s ease, background 0.2s ease;
+
+    &:hover {
+      // обновлён цвет на teal вместо белого — более акцентно
+      color: var(--color-teal);
+      background: rgba(255,255,255,0.04);
+    }
+
+    &--active {
+      color: var(--color-text);
+
+      .header__nav-underline {
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  &__nav-underline {
     position: absolute;
-    top: 60px;
+    bottom: 4px;
+    left: 13px;
+    right: 13px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-teal), var(--color-purple));
+    border-radius: 1px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease-out-expo);
+  }
+
+  // ── CTA ──────────────────────────────────────────────
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 14px;
+    padding: 8px 18px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-bg);
+    background: linear-gradient(135deg, var(--color-teal), var(--color-purple));
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    // FIX 4: сразу видим
+    opacity: 1;
+    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 24px rgba(78,205,196,0.3);
+    }
+  }
+
+  // ── Burger ───────────────────────────────────────────
+  &__burger {
+    // скрыт по умолчанию — показывается через медиазапросы ниже
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    margin-left: 12px;
+    padding: 7px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+
+    &:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+    }
+  }
+
+  &__burger-bar {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transform-origin: center;
+    transition:
+      transform 0.35s var(--ease-out-expo),
+      opacity   0.2s ease,
+      width     0.25s ease;
+
+    &:nth-child(2) { width: 65%; }
+  }
+
+  &__burger--open {
+    border-color: rgba(255,255,255,0.2);
+    
+
+    .header__burger-bar {
+      &:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      &:nth-child(2) { opacity: 0; width: 0; }
+      &:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    }
+  }
+
+  // ── Mobile menu ──────────────────────────────────────
+  &__mobile {
+    position: fixed;
+    top: var(--header-h);
     left: 0;
     right: 0;
-    background-color: #fff;
-    padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    background: var(--color-bg);
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 clamp(24px, 6vw, 48px) clamp(24px, 6vw, 48px);
+    visibility: hidden;
+    opacity: 0;
+    // FIX 5: добавлен небольшой translateY для плавного появления
+    transform: translateY(-8px);
+    transition:
+      opacity    0.3s ease,
+      visibility 0.3s ease,
+      transform  0.3s var(--ease-out-expo);
+
+    &--open {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .header__nav--open {
+  &__mobile-list {
+    list-style: none;
+    padding: 350px 5px 0;
+    display: flex;
+    flex-direction: column; // ссылки строго одна под другой
+    gap: 0;
+    width: 100%;
+  }
+
+  &__mobile-item {
+    opacity: 0;
+    transform: translateX(-24px);
+    width: 100%;
+
+    .header__mobile--open & {
+      animation: mobileItemIn 0.5s var(--ease-out-expo) both;
+    }
+  }
+
+  &__mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 16px 0;
+    font-family: var(--font-display);
+    font-size: clamp(24px, 5.5vw, 36px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--color-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+    transition: color 0.2s ease, padding-left 0.25s var(--ease-out-expo);
+
+    &:last-child { border-bottom: none; }
+
+    &:hover {
+      color: var(--color-text);
+      padding-left: 8px;
+    }
+
+    &--active {
+      color: var(--color-text);
+
+      .header__mobile-num { color: var(--color-teal); }
+
+      // градиент на тексте активной ссылки
+      .header__mobile-label {
+        background: linear-gradient(90deg, var(--color-teal), var(--color-purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+  }
+
+  &__mobile-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--color-muted);
+    flex-shrink: 0;
+    min-width: 22px;
+  }
+
+  // обёртка для текста ссылки (нужна для gradient clip на active)
+  &__mobile-label {
     display: block;
   }
+}
 
-  .header__nav-list {
-    flex-direction: column;
-    gap: 0.5rem;
+// ─── Responsive ──────────────────────────────────────────
+// FIX 6: медиазапросы вынесены ИЗ блока .header —
+// внутри SCSS-блока @media конкурирует со специфичностью родителя
+
+@media (max-width: 820px) {
+  .header {
+    --header-h: 64px;
+
+    &__nav    { display: none; }
+    &__cta    { display: none; }
+    &__burger { display: flex; }
+    &__inner  { padding: 0 20px; }
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    --header-h: 56px;
+
+    &__inner       { padding: 0 16px; }
+    &__logo-name   { font-size: 15px; }
+    &__logo-role   { display: none; }
+
+    &__burger {
+      width: 32px;
+      height: 32px;
+      margin-left: 8px;
+      padding: 6px;
+    }
   }
 }
