@@ -15,8 +15,8 @@ const NAV = [
   { to: '/contact',    label: 'Contact' },
 ];
 
-function useInView(threshold = 0.2) {
-  const ref = useRef(null);
+function useInView<T extends Element = HTMLElement>(threshold = 0.2): [import('react').RefObject<T>, boolean] {
+  const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -28,11 +28,11 @@ function useInView(threshold = 0.2) {
     obs.observe(el);
     return () => obs.disconnect();
   }, [threshold]);
-  return [ref, inView];
+  return [ref as import('react').RefObject<T>, inView];
 }
 
 export default function Footer() {
-  const [ref, inView] = useInView(0.15);
+  const [ref, inView] = useInView<HTMLElement>(0.15);
 
   return (
     <footer ref={ref} className={`footer ${inView ? 'footer--visible' : ''}`}>

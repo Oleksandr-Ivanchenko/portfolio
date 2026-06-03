@@ -123,8 +123,8 @@ const projects = [
   },
 ];
 
-function useInView(threshold = 0.15) {
-  const ref = useRef(null);
+function useInView<T extends Element = HTMLElement>(threshold = 0.15): [import('react').RefObject<T>, boolean] {
+  const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -141,11 +141,11 @@ function useInView(threshold = 0.15) {
     observer.observe(el);
     return () => observer.disconnect();
   }, [threshold]);
-  return [ref, inView];
+  return [ref as import('react').RefObject<T>, inView];
 }
 
-function ProjectCard({ project, index }) {
-  const [ref, inView] = useInView(0.1);
+function ProjectCard({ project, index }: Readonly<{ project: typeof projects[number]; index: number }>) {
+  const [ref, inView] = useInView<HTMLAnchorElement>(0.1);
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -274,7 +274,7 @@ function ProjectCard({ project, index }) {
 
         {/* Tags */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-          {project.tech.map((t) => (
+          {project.tech.map((t: string) => (
             <span
               key={t}
               style={{
@@ -297,9 +297,9 @@ function ProjectCard({ project, index }) {
   );
 }
 
-function Counter({ value }) {
+function Counter({ value }: Readonly<{ value: number }>) {
   const [count, setCount] = useState(0);
-  const [ref, inView] = useInView(0.5);
+  const [ref, inView] = useInView<HTMLSpanElement>(0.5);
   useEffect(() => {
     if (!inView) return;
     let start = 0;

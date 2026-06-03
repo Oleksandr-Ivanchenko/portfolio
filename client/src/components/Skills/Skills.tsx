@@ -97,7 +97,7 @@ function SkillGroup({ group, index, activeFilter, onFilter }: Readonly<{ group: 
   const styleVars = {
     ["--delay" as unknown as string]: `${index * 80}ms`,
     ["--accent" as unknown as string]: group.accent,
-  } as React.CSSProperties;
+  } as unknown as (React.CSSProperties & Record<string, string>);
 
   return (
     <section
@@ -114,7 +114,7 @@ function SkillGroup({ group, index, activeFilter, onFilter }: Readonly<{ group: 
       <button
         className={`skills__group-header ${activeFilter === group.key ? 'skills__group-header--active' : ''}`}
         onClick={() => onFilter(activeFilter === group.key ? null : group.key)}
-        style={{ ["--accent" as unknown as string]: group.accent } as React.CSSProperties}
+    style={{ ["--accent" as unknown as string]: group.accent } as unknown as (React.CSSProperties & Record<string, string>)}
       >
         <span className="skills__group-icon" style={{ color: group.accent, borderColor: `${group.accent}30`, background: `${group.accent}10` }}>
           {group.icon}
@@ -143,9 +143,7 @@ function SkillGroup({ group, index, activeFilter, onFilter }: Readonly<{ group: 
 
 export default function Skills() {
   const [mounted, setMounted]       = useState(false);
-  const _activeFilterState = useState<string | null>(null);
-  const activeFilter = _activeFilterState[0];
-  const setFilter = _activeFilterState[1];
+  const [activeFilter, setFilter] = useState<string | null>(null);
   const totalSkills = SKILL_GROUPS.reduce((acc, g) => acc + g.items.length, 0);
 
   useEffect(() => {
@@ -196,7 +194,7 @@ export default function Skills() {
             <button
               key={g.key}
               className={`skills__filter-btn ${activeFilter === g.key ? 'skills__filter-btn--active' : ''}`}
-              style={{ ["--accent" as unknown as string]: g.accent } as React.CSSProperties}
+              style={{ ["--accent" as unknown as string]: g.accent } as unknown as (React.CSSProperties & Record<string, string>)}
               onClick={() => setFilter(activeFilter === g.key ? null : g.key)}
             >
               {g.label}

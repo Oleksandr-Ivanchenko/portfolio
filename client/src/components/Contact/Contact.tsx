@@ -44,8 +44,8 @@ const CONTACTS = [
   },
 ];
 
-function useInView(threshold = 0.15) {
-  const ref = useRef(null);
+function useInView<T extends Element = HTMLElement>(threshold = 0.15): [import('react').RefObject<T>, boolean] {
+  const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -57,19 +57,19 @@ function useInView(threshold = 0.15) {
     obs.observe(el);
     return () => obs.disconnect();
   }, [threshold]);
-  return [ref, inView];
+  return [ref as import('react').RefObject<T>, inView];
 }
 
 export default function Contact() {
   const [mounted, setMounted] = useState(false);
-  const [copied, setCopied] = useState(null);
+  const [copied, setCopied] = useState<string | null>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 80);
     return () => clearTimeout(t);
   }, []);
 
-  const handleCopy = (value, id) => {
+  const handleCopy = (value: string, id: string) => {
     navigator.clipboard.writeText(value).then(() => {
       setCopied(id);
       setTimeout(() => setCopied(null), 2000);
@@ -117,7 +117,7 @@ export default function Contact() {
   );
 }
 
-interface ContactItem {
+type ContactItem = Readonly<{
   id: string;
   label: string;
   value: string;
@@ -125,11 +125,13 @@ interface ContactItem {
   icon: React.ReactNode;
   accent: string;
   external: boolean;
-}
+}>;
 
-function ContactCard({ item, index, copied, onCopy }) {
-  const [ref, inView] = useInView(0.1);
+function ContactCard({ item, index, copied, onCopy }: Readonly<{ item: ContactItem; index: number; copied: boolean; onCopy: () => void }>) {
+  const [ref, inView] = useInView<HTMLLIElement>(0.1);
   const [hovered, setHovered] = useState(false);
+  type CSSVarProps = React.CSSProperties & Record<string, string>;
+  const accentStyle = { ['--accent' as unknown as string]: item.accent } as unknown as CSSVarProps;
 
   return (
     <li
@@ -163,7 +165,7 @@ function ContactCard({ item, index, copied, onCopy }) {
           className={`contact__copy-btn ${copied ? 'contact__copy-btn--done' : ''}`}
           onClick={onCopy}
           title="Copy"
-          style={{ '--accent': item.accent }}
+          style={accentStyle}
         >
           {copied ? (
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -182,7 +184,7 @@ function ContactCard({ item, index, copied, onCopy }) {
           className="contact__arrow-btn"
           target={item.external ? '_blank' : undefined}
           rel={item.external ? 'noopener noreferrer' : undefined}
-          style={{ '--accent': item.accent }}
+          style={accentStyle}
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5M11.5 2.5V9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -194,7 +196,7 @@ function ContactCard({ item, index, copied, onCopy }) {
 }
 
 function AvailabilityBadge() {
-  const [ref, inView] = useInView(0.3);
+  const [ref, inView] = useInView<HTMLDivElement>(0.3);
   return (
     <div ref={ref} className={`contact__availability ${inView ? 'contact__availability--visible' : ''}`}>
       <span className="contact__availability-dot" />
