@@ -12,9 +12,9 @@ const NAV_ITEMS = [
 ];
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen]   = useState(false);
-  const [scrolled,   setScrolled]     = useState(false);
-  const [mounted,    setMounted]      = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -102,6 +102,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div className={`header__mobile ${mobileOpen ? 'header__mobile--open' : ''}`}>
+        
         <nav aria-label="Mobile navigation">
           <ul className="header__mobile-list">
             {NAV_ITEMS.map(({ href, label }, i) => {

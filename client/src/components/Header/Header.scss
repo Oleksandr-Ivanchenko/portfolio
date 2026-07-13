@@ -1,20 +1,6 @@
+@use '../../utils/vars';
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
 
-// ─── Tokens ──────────────────────────────────────────────
-:root {
-  --color-bg:      #080C10;
-  --color-surface: rgba(255,255,255,0.03);
-  --color-border:  rgba(255,255,255,0.07);
-  --color-text:    #FAFAFA;
-  --color-muted:   rgba(255,255,255,0.38);
-  --color-teal:    #4ECDC4;
-  --color-purple:  #A78BFA;
-  --font-display:  'Syne', sans-serif;
-  --font-body:     'DM Sans', sans-serif;
-  --font-mono:     'DM Mono', monospace;
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --header-h:      72px;
-}
 
 // ─── Keyframes ───────────────────────────────────────────
 @keyframes headerSlideDown {
@@ -39,17 +25,18 @@
   left: 0;
   right: 0;
   z-index: 100;
-  height: var(--header-h);
+  height: $header-h;
   display: flex;
   align-items: center;
+  
 
   // FIX 1: хедер всегда виден — animation fills both направление
   // opacity: 0 убран, используем animation-fill-mode: both
-  animation: headerSlideDown 0.7s var(--ease-out-expo) 0.05s both;
+  animation: headerSlideDown 0.7s $ease-out-expo 0.05s both;
 
   border-bottom: 1px solid transparent;
   transition:
-    height          0.35s var(--ease-out-expo),
+    height          0.35s $ease-out-expo,
     background      0.35s ease,
     border-color    0.35s ease,
     backdrop-filter 0.35s ease;
@@ -60,24 +47,25 @@
     background: rgba(8, 12, 16, 0.88);
     backdrop-filter: blur(24px) saturate(160%);
     -webkit-backdrop-filter: blur(24px) saturate(160%);
-    border-bottom-color: var(--color-border);
+    border-bottom-color: $color-border;
   }
 
   // ── Mobile menu open ─────────────────────────────────
   &--open {
-    background: var(--color-bg) !important;
+    background: $color-bg !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
 
   // ── Inner ────────────────────────────────────────────
   &__inner {
+ position: relative; // создаём свой stacking context
+    z-index: 2;         // чтобы быть ВЫШЕ меню
     display: flex;
     align-items: center;
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
-    // FIX 2: убран translateX(10px) — сдвигал весь хедер вправо
     padding: 0 clamp(20px, 4vw, 60px);
   }
 
@@ -95,9 +83,9 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--color-teal);
+    background: $color-teal;
     flex-shrink: 0;
-    transition: transform 0.3s var(--ease-out-expo);
+    transition: transform 0.3s $ease-out-expo;
 
     .header__logo:hover & {
       transform: scale(1.6);
@@ -105,26 +93,26 @@
   }
 
   &__logo-name {
-    font-family: var(--font-display);
+    font-family: $font-display;
     font-size: 16px;
     font-weight: 700;
-    color: var(--color-text);
+    color: $color-text;
     letter-spacing: -0.02em;
     white-space: nowrap;
     transition: color 0.2s ease;
 
     .header__logo:hover & {
-      color: var(--color-teal);
+      color: $color-teal;
     }
   }
 
   &__logo-role {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 10px;
     letter-spacing: 0.08em;
-    color: var(--color-muted);
+    color: $color-muted;
     padding: 2px 7px;
-    border: 1px solid var(--color-border);
+    border: 1px solid $color-border;
     border-radius: 4px;
     white-space: nowrap;
   }
@@ -148,7 +136,7 @@
     opacity: 1;
 
     .header--mounted & {
-      animation: navLinkIn 0.5s var(--ease-out-expo) both;
+      animation: navLinkIn 0.5s $ease-out-expo both;
 
       @for $i from 1 through 6 {
         &:nth-child(#{$i}) {
@@ -162,10 +150,10 @@
     position: relative;
     display: block;
     padding: 8px 13px;
-    font-family: var(--font-body);
+    font-family: $font-body;
     font-size: 14px;
     font-weight: 400;
-    color: var(--color-muted);
+    color: $color-muted;
     text-decoration: none;
     border-radius: 8px;
     white-space: nowrap;
@@ -173,12 +161,12 @@
 
     &:hover {
       // обновлён цвет на teal вместо белого — более акцентно
-      color: var(--color-teal);
+      color: $color-teal;
       background: rgba(255,255,255,0.04);
     }
 
     &--active {
-      color: var(--color-text);
+      color: $color-text;
 
       .header__nav-underline {
         transform: scaleX(1);
@@ -192,11 +180,11 @@
     left: 13px;
     right: 13px;
     height: 1px;
-    background: linear-gradient(90deg, var(--color-teal), var(--color-purple));
+    background: linear-gradient(90deg, $color-teal, $color-purple);
     border-radius: 1px;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.3s var(--ease-out-expo);
+    transition: transform 0.3s $ease-out-expo;
   }
 
   // ── CTA ──────────────────────────────────────────────
@@ -206,18 +194,18 @@
     flex-shrink: 0;
     margin-left: 14px;
     padding: 8px 18px;
-    font-family: var(--font-body);
+    font-family: $font-body;
     font-size: 13px;
     font-weight: 500;
-    color: var(--color-bg);
-    background: linear-gradient(135deg, var(--color-teal), var(--color-purple));
+    color: $color-bg;
+    background: linear-gradient(135deg, $color-teal, $color-purple);
     border-radius: 50px;
     text-decoration: none;
     letter-spacing: 0.01em;
     white-space: nowrap;
     // FIX 4: сразу видим
     opacity: 1;
-    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease;
+    transition: transform 0.3s $ease-out-expo, box-shadow 0.3s ease;
 
     &:hover {
       transform: scale(1.05);
@@ -236,10 +224,10 @@
     width: 36px;
     height: 36px;
     flex-shrink: 0;
-    margin-left: 12px;
+    // margin-left: 12px;
     padding: 7px;
     background: transparent;
-    border: 1px solid var(--color-border);
+    border: 1px solid $color-border;
     border-radius: 8px;
     cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
@@ -251,14 +239,15 @@
   }
 
   &__burger-bar {
+    z-index: 3;
     display: block;
     width: 100%;
     height: 1.5px;
-    background: var(--color-text);
+    background: $color-text;
     border-radius: 2px;
     transform-origin: center;
     transition:
-      transform 0.35s var(--ease-out-expo),
+      transform 0.35s $ease-out-expo,
       opacity   0.2s ease,
       width     0.25s ease;
 
@@ -279,24 +268,21 @@
   // ── Mobile menu ──────────────────────────────────────
   &__mobile {
     position: fixed;
-    top: var(--header-h);
+    top: $header-h;
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--color-bg);
-    z-index: 99;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 clamp(24px, 6vw, 48px) clamp(24px, 6vw, 48px);
+    padding: 0 $mobile-gutter clamp(24px, 6vw, 48px);
     visibility: hidden;
     opacity: 0;
-    // FIX 5: добавлен небольшой translateY для плавного появления
     transform: translateY(-8px);
     transition:
       opacity    0.3s ease,
       visibility 0.3s ease,
-      transform  0.3s var(--ease-out-expo);
+      transform  0.3s $ease-out-expo;
 
     &--open {
       visibility: visible;
@@ -307,11 +293,15 @@
 
   &__mobile-list {
     list-style: none;
+    margin-top: 100px;
     padding: 350px 5px 0;
+    margin-left: calc(-1 * clamp(24px, 6vw, 48px));
+    margin-right: calc(-1 * clamp(24px, 6vw, 48px));
+    // width: calc(100% + clamp(24px, 6vw, 48px) * 2);
+    background-color: $color-bg;
     display: flex;
-    flex-direction: column; // ссылки строго одна под другой
+    flex-direction: column;
     gap: 0;
-    width: 100%;
   }
 
   &__mobile-item {
@@ -320,7 +310,7 @@
     width: 100%;
 
     .header__mobile--open & {
-      animation: mobileItemIn 0.5s var(--ease-out-expo) both;
+      animation: mobileItemIn 0.5s $ease-out-expo both;
     }
   }
 
@@ -330,30 +320,30 @@
     gap: 14px;
     width: 100%;
     padding: 16px 0;
-    font-family: var(--font-display);
+    font-family: $font-display;
     font-size: clamp(24px, 5.5vw, 36px);
     font-weight: 700;
     letter-spacing: -0.03em;
-    color: var(--color-muted);
+    color: $color-muted;
     text-decoration: none;
-    border-bottom: 1px solid var(--color-border);
-    transition: color 0.2s ease, padding-left 0.25s var(--ease-out-expo);
+    border-bottom: 1px solid $color-border;
+    transition: color 0.2s ease, padding-left 0.25s $ease-out-expo;
 
     &:last-child { border-bottom: none; }
 
     &:hover {
-      color: var(--color-text);
+      color: $color-text;
       padding-left: 8px;
     }
 
     &--active {
-      color: var(--color-text);
+      color: $color-text;
 
-      .header__mobile-num { color: var(--color-teal); }
+      .header__mobile-num { color: $color-teal; }
 
       // градиент на тексте активной ссылки
       .header__mobile-label {
-        background: linear-gradient(90deg, var(--color-teal), var(--color-purple));
+        background: linear-gradient(90deg, $color-teal, $color-purple);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -361,11 +351,46 @@
     }
   }
 
+  &__mobile-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(100px);
+
+  &--teal {
+    width: 400px;
+    height: 400px;
+    top: -10%;
+    left: -15%;
+    background: radial-gradient(circle, rgba(78,205,196,0.1) 0%, transparent 70%);
+  }
+
+  &--purple {
+    width: 450px;
+    height: 450px;
+    bottom: -10%;
+    right: -15%;
+    background: radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 70%);
+  }
+}
+
+&__mobile-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
   &__mobile-num {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 10px;
     letter-spacing: 0.12em;
-    color: var(--color-muted);
+    color: $color-muted;
     flex-shrink: 0;
     min-width: 22px;
   }

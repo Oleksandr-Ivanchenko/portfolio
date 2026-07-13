@@ -7,6 +7,8 @@ import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
 import Contact from './components/Contact/Contact';
 import Experience from "./components/Experience/Experience";
+// import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+// import NotFound from "./components/NotFound/NotFound";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -15,6 +17,7 @@ export default function App() {
 
   return (
     <Router basename={basename}>
+      {/* <ScrollToTop /> */}
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -23,6 +26,7 @@ export default function App() {
         <Route path="/skills" element={<Skills />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/experience" element={<Experience />} />
+        {/* <Route path="*" element={<NotFound />} />   */}
       </Routes>
       <Footer />
     </Router>
