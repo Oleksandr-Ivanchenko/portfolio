@@ -1,18 +1,5 @@
+@use '../../utils/vars';
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
-
-:root {
-  --color-bg:      #080C10;
-  --color-surface: rgba(255,255,255,0.03);
-  --color-border:  rgba(255,255,255,0.07);
-  --color-text:    #FAFAFA;
-  --color-muted:   rgba(255,255,255,0.38);
-  --color-teal:    #4ECDC4;
-  --color-purple:  #A78BFA;
-  --font-display:  'Syne', sans-serif;
-  --font-body:     'DM Sans', sans-serif;
-  --font-mono:     'DM Mono', monospace;
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-}
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(40px); }
@@ -45,9 +32,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-bg);
+  background: $color-bg;
   overflow: hidden;
-  font-family: var(--font-body);
+  font-family: $font-body;
 
   &__blob {
     position: fixed;
@@ -101,15 +88,15 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: $color-muted;
     margin-bottom: 20px;
 
     .contact--mounted & {
-      animation: fadeUp 0.7s var(--ease-out-expo) 0.05s both;
+      animation: fadeUp 0.7s $ease-out-expo 0.05s both;
     }
   }
 
@@ -117,33 +104,33 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--color-teal);
+    background: $color-teal;
     animation: pulseDot 2.2s ease-in-out infinite;
     flex-shrink: 0;
   }
 
   &__title {
-    font-family: var(--font-display);
+    font-family: $font-display;
     font-size: clamp(44px, 8vw, 80px);
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 0.95;
-    color: var(--color-text);
+    color: $color-text;
     margin: 0 0 20px;
 
     .contact--mounted & {
-      animation: fadeUp 0.9s var(--ease-out-expo) 0.12s both;
+      animation: fadeUp 0.9s $ease-out-expo 0.12s both;
     }
   }
 
   &__text {
     font-size: 15px;
     line-height: 1.7;
-    color: var(--color-muted);
+    color: $color-muted;
     max-width: 440px;
 
     .contact--mounted & {
-      animation: fadeUp 0.8s var(--ease-out-expo) 0.22s both;
+      animation: fadeUp 0.8s $ease-out-expo 0.22s both;
     }
   }
 
@@ -164,20 +151,20 @@
     align-items: center;
     gap: 18px;
     padding: 22px 24px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: $color-surface;
+    border: 1px solid $color-border;
     border-radius: 16px;
     overflow: hidden;
     opacity: 0;
     transition:
-      opacity 0.6s var(--ease-out-expo),
-      transform 0.6s var(--ease-out-expo),
+      opacity 0.6s $ease-out-expo,
+      transform 0.6s $ease-out-expo,
       border-color 0.3s ease,
       background 0.3s ease,
       box-shadow 0.3s ease;
 
     &--visible {
-      animation: itemIn 0.7s var(--ease-out-expo) both;
+      animation: itemIn 0.7s $ease-out-expo both;
     }
 
     &:hover {
@@ -206,7 +193,7 @@
     border-radius: 12px;
     border: 1px solid;
     flex-shrink: 0;
-    transition: transform 0.3s var(--ease-out-expo);
+    transition: transform 0.3s $ease-out-expo;
 
     .contact__item:hover & {
       transform: scale(1.08) rotate(-3deg);
@@ -222,15 +209,15 @@
   }
 
   &__item-label {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 10px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: $color-muted;
   }
 
   &__item-value {
-    font-family: var(--font-body);
+    font-family: $font-body;
     font-size: 15px;
     font-weight: 500;
     text-decoration: none;
@@ -262,24 +249,24 @@
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    border: 1px solid var(--color-border);
+    border: 1px solid $color-border;
     background: transparent;
     cursor: pointer;
-    color: var(--color-muted);
+    color: $color-muted;
     text-decoration: none;
     transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 
     &:hover {
-      color: var(--accent, var(--color-teal));
-      border-color: var(--accent, var(--color-teal));
+      color: $color-accent;
+      border-color: $color-accent;
       background: rgba(255,255,255,0.04);
       transform: scale(1.1);
     }
   }
 
   &__copy-btn--done {
-    color: var(--color-teal) !important;
-    border-color: var(--color-teal) !important;
+    color: $color-teal !important;
+    border-color: $color-teal !important;
     background: rgba(78,205,196,0.1) !important;
   }
 
@@ -295,7 +282,7 @@
     opacity: 0;
 
     &--visible {
-      animation: badgeIn 0.7s var(--ease-out-expo) 0.5s both;
+      animation: badgeIn 0.7s $ease-out-expo 0.5s both;
     }
   }
 
@@ -303,16 +290,16 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: var(--color-teal);
+    background: $color-teal;
     animation: pulseDot 2s ease-in-out infinite;
     flex-shrink: 0;
   }
 
   &__availability-text {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 11px;
     letter-spacing: 0.08em;
-    color: var(--color-teal);
+    color: $color-teal;
   }
 }
 

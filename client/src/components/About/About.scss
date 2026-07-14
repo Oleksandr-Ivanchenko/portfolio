@@ -1,18 +1,5 @@
+@use '../../utils/vars';
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
-
-:root {
-  --color-bg:      #080C10;
-  --color-surface: rgba(255,255,255,0.03);
-  --color-border:  rgba(255,255,255,0.07);
-  --color-text:    #FAFAFA;
-  --color-muted:   rgba(255,255,255,0.38);
-  --color-teal:    #4ECDC4;
-  --color-purple:  #A78BFA;
-  --font-display:  'Syne', sans-serif;
-  --font-body:     'DM Sans', sans-serif;
-  --font-mono:     'DM Mono', monospace;
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-}
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(36px); }
@@ -42,8 +29,8 @@
 .about {
   position: relative;
   min-height: 100vh;
-  background: var(--color-bg);
-  font-family: var(--font-body);
+  background: $color-bg;
+  font-family: $font-body;
   overflow: hidden;
 
   &__blob {
@@ -98,7 +85,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -106,7 +93,7 @@
     margin-bottom: 20px;
 
     .about--mounted & {
-      animation: fadeUp 0.7s var(--ease-out-expo) 0.05s both;
+      animation: fadeUp 0.7s $ease-out-expo 0.05s both;
     }
   }
 
@@ -114,12 +101,12 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--color-teal);
+    background: $color-teal;
     animation: pulseDot 2.2s ease-in-out infinite;
   }
 
   &__title {
-    font-family: var(--font-display);
+    font-family: $font-display;
     font-size: clamp(52px, 9vw, 96px);
     font-weight: 800;
     letter-spacing: -0.04em;
@@ -132,18 +119,18 @@
 
   &__title-word {
     display: block;
-    color: var(--color-text);
+    color: $color-text;
     opacity: 0;
 
     .about--mounted & {
-      animation: fadeUp 0.9s var(--ease-out-expo) both;
+      animation: fadeUp 0.9s $ease-out-expo both;
     }
 
     &:nth-child(1) { animation-delay: 0.1s !important; }
     &:nth-child(2) { animation-delay: 0.2s !important; }
 
     &--accent {
-      background: linear-gradient(135deg, var(--color-teal), var(--color-purple));
+      background: linear-gradient(135deg, $color-teal, $color-purple);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -153,24 +140,24 @@
   &__intro {
     font-size: clamp(15px, 1.5vw, 17px);
     line-height: 1.75;
-    color: var(--color-muted);
+    color: $color-muted;
     max-width: 600px;
     opacity: 0;
 
-    strong { color: var(--color-text); font-weight: 500; }
+    strong { color: $color-text; font-weight: 500; }
 
     .about--mounted & {
-      animation: fadeUp 0.8s var(--ease-out-expo) 0.3s both;
+      animation: fadeUp 0.8s $ease-out-expo 0.3s both;
     }
   }
 
   // ── Timeline section ─────────────────────────────────────
   &__section-title {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: $color-muted;
     margin: 0 0 40px 48px;
   }
 
@@ -188,7 +175,7 @@
     opacity: 0;
 
     &--visible {
-      animation: blockIn 0.8s var(--ease-out-expo) var(--delay, 0ms) both;
+      animation: blockIn 0.8s $ease-out-expo  var(--delay, 0ms) both;
     }
 
     &:last-child {
@@ -204,12 +191,12 @@
     top: 20px;
     bottom: 0;
     width: 1px;
-    background: linear-gradient(to bottom, var(--accent, var(--color-teal)), transparent);
+    background: linear-gradient(to bottom, var(--accent, $color-teal), transparent);
     transform-origin: top;
     transform: scaleY(0);
 
     .about__block--visible & {
-      animation: growLine 1s var(--ease-out-expo) calc(var(--delay, 0ms) + 200ms) both;
+      animation: growLine 1s $ease-out-expo calc(var(--delay, 0ms) + 200ms) both;
     }
   }
 
@@ -221,8 +208,8 @@
     border-radius: 50%;
     flex-shrink: 0;
     margin-top: 3px;
-    border: 3px solid var(--color-bg);
-    transition: transform 0.3s var(--ease-out-expo);
+    border: 3px solid $color-bg;
+    transition: transform 0.3s $ease-out-expo;
 
     .about__block:hover & {
       transform: scale(1.2);
@@ -236,16 +223,16 @@
 
   &__period {
     display: block;
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: $color-muted;
     margin-bottom: 6px;
   }
 
   &__role {
-    font-family: var(--font-display);
+    font-family: $font-display;
     font-size: clamp(20px, 2.5vw, 26px);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -267,11 +254,11 @@
     flex-direction: column;
     gap: 3px;
     padding: 14px 18px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-left: 2px solid var(--accent, var(--color-teal));
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-left: 2px solid var(--accent, $color-teal);
     border-radius: 0 10px 10px 0;
-    transition: background 0.3s ease, transform 0.3s var(--ease-out-expo);
+    transition: background 0.3s ease, transform 0.3s $ease-out-expo;
 
     &:hover {
       background: rgba(255,255,255,0.05);
@@ -280,47 +267,47 @@
   }
 
   &__list-label {
-    font-family: var(--font-body);
+    font-family: $font-body;
     font-size: 14px;
     font-weight: 500;
-    color: var(--color-text);
+    color: $color-text;
   }
 
   &__list-desc {
     font-size: 13px;
     line-height: 1.6;
-    color: var(--color-muted);
+    color: $color-muted;
   }
 
   // ── Approach ────────────────────────────────────────────
   &__approach {
     padding: clamp(32px, 4vw, 48px);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: $color-surface;
+    border: 1px solid $color-border;
     border-radius: 20px;
     opacity: 0;
 
     &--visible {
-      animation: approachIn 0.8s var(--ease-out-expo) both;
+      animation: approachIn 0.8s $ease-out-expo both;
     }
   }
 
   &__subtitle {
-    font-family: var(--font-display);
+    font-family: $font-display;
     font-size: clamp(22px, 3vw, 30px);
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: var(--color-text);
+    color: $color-text;
     margin: 0 0 20px;
   }
 
   &__text {
     font-size: 15px;
     line-height: 1.75;
-    color: var(--color-muted);
+    color: $color-muted;
     margin: 0 0 16px;
 
-    strong { color: var(--color-text); font-weight: 500; }
+    strong { color: $color-text; font-weight: 500; }
 
     &:last-child { margin-bottom: 0; }
   }
@@ -338,11 +325,11 @@
     position: absolute;
     top: -8px;
     left: 16px;
-    font-family: var(--font-display);
+    font-family: $font-display;
     font-size: 48px;
     font-weight: 800;
     line-height: 1;
-    color: var(--color-teal);
+    color: $color-teal;
     opacity: 0.4;
   }
 

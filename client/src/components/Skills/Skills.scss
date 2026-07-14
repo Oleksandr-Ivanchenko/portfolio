@@ -1,3 +1,4 @@
+@use "../../utils/vars";
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
 
 :root {
@@ -42,8 +43,8 @@
 .skills {
   position: relative;
   min-height: 100vh;
-  background: var(--color-bg);
-  font-family: var(--font-body);
+  background: $color-bg;
+  font-family: $font-body;
   overflow: hidden;
 
   // ── Blobs ──────────────────────────────────────────────
@@ -95,7 +96,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -104,7 +105,7 @@
     opacity: 0;
 
     .skills--mounted & {
-      animation: fadeUp 0.7s var(--ease-out-expo) 0.05s both;
+      animation: fadeUp 0.7s $ease-out-expo 0.05s both;
     }
   }
 
@@ -134,13 +135,13 @@
     opacity: 0;
 
     .skills--mounted & {
-      animation: fadeUp 0.9s var(--ease-out-expo) both;
+      animation: fadeUp 0.9s $ease-out-expo both;
       &:nth-child(1) { animation-delay: 0.1s; }
       &:nth-child(2) { animation-delay: 0.2s; }
     }
 
     &--accent {
-      background: linear-gradient(135deg, var(--color-teal), var(--color-purple));
+      background: linear-gradient(135deg, $color-teal, $color-purple);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -150,13 +151,13 @@
   &__intro {
     font-size: clamp(14px, 1.4vw, 16px);
     line-height: 1.75;
-    color: var(--color-muted);
+    color: $color-muted;
     max-width: 520px;
     margin: 0 0 24px;
     opacity: 0;
 
     .skills--mounted & {
-      animation: fadeUp 0.8s var(--ease-out-expo) 0.28s both;
+      animation: fadeUp 0.8s $ease-out-expo 0.28s both;
     }
   }
 
@@ -171,25 +172,25 @@
     opacity: 0;
 
     .skills--mounted & {
-      animation: badgePop 0.7s var(--ease-out-expo) 0.4s both;
+      animation: badgePop 0.7s $ease-out-expo 0.4s both;
     }
   }
 
   &__badge-value {
-    font-family: var(--font-display);
+    font-family: $font-display;
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.03em;
-    color: var(--color-teal);
+    color: $color-teal;
     line-height: 1;
   }
 
   &__badge-label {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 10px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: $color-muted;
   }
 
   // ── Filter bar ─────────────────────────────────────────
@@ -201,33 +202,33 @@
     opacity: 0;
 
     .skills--mounted & {
-      animation: fadeUp 0.7s var(--ease-out-expo) 0.48s both;
+      animation: fadeUp 0.7s $ease-out-expo 0.48s both;
     }
   }
 
   &__filter-btn {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 7px 16px;
     border-radius: 50px;
-    border: 1px solid var(--color-border);
+    border: 1px solid $color-border;
     background: transparent;
     color: var(--color-muted);
     cursor: pointer;
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s var(--ease-out-expo);
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s $ease-out-expo;
 
     &:hover {
-      color: var(--color-text);
+      color: $color-text;
       border-color: rgba(255,255,255,0.2);
       transform: translateY(-1px);
     }
 
     &--active {
-      color: var(--accent, var(--color-teal));
-      border-color: var(--accent, var(--color-teal));
-      background: color-mix(in srgb, var(--accent, var(--color-teal)) 10%, transparent);
+      color: var(--accent, $color-teal);
+      border-color: var(--accent, $color-teal);
+      background: color-mix(in srgb, var(--accent, $color-teal) 10%, transparent);
     }
   }
 
@@ -242,20 +243,20 @@
   // ── Group card ─────────────────────────────────────────
   &__group {
     position: relative;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: $color-surface;
+    border: 1px solid $color-border;
     border-radius: 18px;
     overflow: hidden;
     opacity: 0;
     transition:
       opacity   0.4s ease,
-      transform 0.4s var(--ease-out-expo),
+      transform 0.4s $ease-out-expo,
       border-color 0.3s ease,
       background   0.3s ease,
       box-shadow   0.3s ease;
 
     &--visible {
-      animation: groupIn 0.7s var(--ease-out-expo) var(--delay, 0ms) both;
+      animation: groupIn 0.7s $ease-out-expo var(--delay, 0ms) both;
     }
 
     &--dimmed {
@@ -276,7 +277,7 @@
     top: -40px; right: -40px;
     width: 160px; height: 160px;
     border-radius: 50%;
-    background: var(--accent, var(--color-teal));
+    background: var(--accent, $color-teal);
     opacity: 0.04;
     filter: blur(50px);
     pointer-events: none;
@@ -296,7 +297,7 @@
     border: none;
     cursor: pointer;
     text-align: left;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid $color-border;
     transition: background 0.2s ease;
 
     &:hover { background: rgba(255,255,255,0.02); }
@@ -314,13 +315,13 @@
     border-radius: 9px;
     border: 1px solid;
     flex-shrink: 0;
-    transition: transform 0.3s var(--ease-out-expo);
+    transition: transform 0.3s $ease-out-expo;
 
     .skills__group:hover & { transform: rotate(-6deg) scale(1.08); }
   }
 
   &__group-label {
-    font-family: var(--font-display);
+    font-family: $font-display;
     font-size: 16px;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -330,7 +331,7 @@
   }
 
   &__group-count {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 11px;
     letter-spacing: 0.06em;
     padding: 3px 9px;
@@ -356,15 +357,15 @@
     opacity: 0;
     transform: translateX(-10px);
     transition:
-      opacity   0.4s var(--ease-out-expo),
-      transform 0.4s var(--ease-out-expo);
+      opacity   0.4s $ease-out-expo,
+      transform 0.4s $ease-out-expo;
 
     .skills__group--visible & {
-      animation: itemIn 0.5s var(--ease-out-expo) var(--delay, 0ms) both;
+      animation: itemIn 0.5s $ease-out-expo var(--delay, 0ms) both;
     }
 
     &:hover .skills__item-text {
-      color: var(--color-text);
+      color: $color-text;
     }
   }
 
@@ -378,7 +379,7 @@
   &__item-text {
     font-size: 13px;
     line-height: 1.5;
-    color: var(--color-muted);
+    color: $color-muted;
     transition: color 0.2s ease;
   }
 }

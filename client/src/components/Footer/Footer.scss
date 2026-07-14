@@ -31,12 +31,12 @@
 
 .footer {
   position: relative;
-  background: var(--color-bg);
-  font-family: var(--font-body);
+  background: $color-bg;
+  font-family: $font-body;
   opacity: 0;
 
   &--visible {
-    animation: footerIn 0.8s var(--ease-out-expo) both;
+    animation: footerIn 0.8s $ease-out-expo both;
   }
 
   // ── Top divider ────────────────────────────────────────
@@ -44,8 +44,8 @@
     height: 1px;
     background: linear-gradient(90deg,
       transparent 0%,
-      var(--color-teal) 20%,
-      var(--color-purple) 60%,
+      $color-teal 20%,
+      $color-purple 60%,
       transparent 100%
     );
     transform-origin: left;
@@ -53,7 +53,7 @@
     opacity: 0.4;
 
     .footer--visible & {
-      animation: lineExpand 1.2s var(--ease-out-expo) 0.1s both;
+      animation: lineExpand 1.2s $ease-out-expo 0.1s both;
     }
   }
 
@@ -95,48 +95,48 @@
   &__logo-dot {
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--color-teal);
-    transition: transform 0.3s var(--ease-out-expo);
+    background: $color-teal;
+    transition: transform 0.3s $ease-out-expo;
 
     .footer__logo:hover & { transform: scale(1.6); }
   }
 
   &__logo-name {
-    font-family: var(--font-display);
+    font-family: $font-display;
     font-size: 17px;
     font-weight: 700;
-    color: var(--color-text);
+    color: $color-text;
     letter-spacing: -0.02em;
     transition: color 0.2s ease;
 
-    .footer__logo:hover & { color: var(--color-teal); }
+    .footer__logo:hover & { color: $color-teal; }
   }
 
   &__logo-role {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 10px;
     letter-spacing: 0.08em;
-    color: var(--color-muted);
+    color: $color-muted;
     padding: 2px 7px;
-    border: 1px solid var(--color-border);
+    border: 1px solid $color-border;
     border-radius: 4px;
   }
 
   &__tagline {
     font-size: 13px;
     line-height: 1.7;
-    color: var(--color-muted);
+    color: $color-muted;
     max-width: 260px;
   }
 
   // ── Nav & Contact columns ──────────────────────────────
   &__nav-label {
     display: block;
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: $color-muted;
     margin-bottom: 14px;
   }
 
@@ -153,13 +153,13 @@
   &__nav-link {
     font-size: 14px;
     font-weight: 400;
-    color: var(--color-muted);
+    color: $color-muted;
     text-decoration: none;
     transition: color 0.2s ease, transform 0.2s ease;
     display: block;
 
     &:hover {
-      color: var(--color-text);
+      color: $color-text;
       transform: translateX(4px);
     }
   }
@@ -169,21 +169,21 @@
     align-items: center;
     gap: 6px;
     font-size: 14px;
-    color: var(--color-muted);
+    color: $color-muted;
     text-decoration: none;
     transition: color 0.2s ease;
 
     svg { opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; }
 
     &:hover {
-      color: var(--color-teal);
+      color: $color-teal;
       svg { opacity: 1; transform: translate(2px, -2px); }
     }
   }
 
   // ── Bottom bar ─────────────────────────────────────────
   &__bottom {
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid $color-border;
   }
 
   &__bottom-inner {
@@ -198,10 +198,10 @@
   }
 
   &__copy {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 11px;
     letter-spacing: 0.06em;
-    color: var(--color-muted);
+    color: $color-muted;
   }
 
   &__status {
@@ -213,15 +213,15 @@
   &__status-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
-    background: var(--color-teal);
+    background: $color-teal;
     animation: pulseDot 2s ease-in-out infinite;
     flex-shrink: 0;
   }
 
   &__status-text {
-    font-family: var(--font-mono);
+    font-family: $font-mono;
     font-size: 11px;
     letter-spacing: 0.08em;
-    color: var(--color-teal);
+    color: $color-teal;
   }
 }

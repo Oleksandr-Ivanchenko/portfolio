@@ -192,7 +192,6 @@ function ProjectCard({ project, index }: Readonly<{ project: typeof projects[num
               <path d="M3 13L13 3M13 3H6M13 3V10" stroke={project.accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
-
           <h2 style={{ margin: '0 0 12px', fontFamily: "'Syne', sans-serif", fontSize: 'clamp(18px, 2.2vw, 24px)', fontWeight: 700, color: '#FAFAFA' }}>{project.title}</h2>
 
           <p style={{ margin: '0 0 24px', fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: 'rgba(255,255,255,0.45)' }}>{project.description}</p>

@@ -195,7 +195,7 @@ export default function Experience() {
           {/* Stats row */}
           <div className="experience__stats">
             {[
-              { value: '3+', label: 'Years' },
+              { value: '5+', label: 'Years' },
               { value: '3',  label: 'Companies' },
               { value: '12+', label: 'Projects' },
             ].map(s => (

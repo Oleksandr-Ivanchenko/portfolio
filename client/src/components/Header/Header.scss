@@ -59,8 +59,8 @@
 
   // ── Inner ────────────────────────────────────────────
   &__inner {
- position: relative; // создаём свой stacking context
-    z-index: 2;         // чтобы быть ВЫШЕ меню
+ position: relative;
+    z-index: 2;         
     display: flex;
     align-items: center;
     width: 100%;

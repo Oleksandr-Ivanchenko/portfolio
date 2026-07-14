@@ -3,8 +3,6 @@ import './Home.scss';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-const TITLE_SIZE = 48; // Adjust this value to change the font size
-
 export default function Home() {
   const [mounted, setMounted] = useState(false);
 
