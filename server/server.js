@@ -2,12 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const dotenv = require('dotenv');
+
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 const DATA_FILE = path.join(__dirname, 'data', 'requests.json');
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'portfolio-admin';
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'portfolio-admin-token';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
+const AUTH_CONFIGURED = Boolean(ADMIN_PASSWORD && ADMIN_TOKEN);
 
 app.use(cors());
 app.use(express.json());
@@ -26,6 +30,10 @@ function writeRequests(data) {
 }
 
 function isAuthorized(req) {
+  if (!AUTH_CONFIGURED) {
+    return false;
+  }
+
   const headerToken = req.headers.authorization;
   const token = headerToken?.startsWith('Bearer ') ? headerToken.slice(7) : req.headers['x-admin-token'];
   return token === ADMIN_TOKEN;
@@ -37,6 +45,10 @@ app.get('/api/health', (req, res) => {
 
 app.post('/api/auth', (req, res) => {
   const { password } = req.body;
+
+  if (!AUTH_CONFIGURED) {
+    return res.status(500).json({ error: 'Admin credentials are not configured' });
+  }
 
   if (password === ADMIN_PASSWORD) {
     return res.json({ ok: true, token: ADMIN_TOKEN });
