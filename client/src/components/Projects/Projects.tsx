@@ -378,7 +378,7 @@ export default function Projects() {
   const stats = [
     { label: "Projects", value: 12 },
     { label: "Technologies", value: 30 },
-    { label: "Years", value: 5 },
+    { label: "Years", value: 4 },
   ];
 
   return (
