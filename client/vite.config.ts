@@ -6,10 +6,17 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   base: '/portfolio/',
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+      },
+    },
+  },
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler', 
         additionalData: `@use "@/utils/_vars.scss" as *;`
       }
     }

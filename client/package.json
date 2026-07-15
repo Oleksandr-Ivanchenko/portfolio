@@ -6,8 +6,8 @@
   "homepage": "https://oleksandr-ivanchenko.github.io/portfolio",
   "scripts": {
     "dev": "vite",
-  "build": "tsc -b && vite build",
-  "postbuild": "cp -f dist/index.html dist/404.html",
+    "build": "tsc -b && vite build",
+    "postbuild": "node -e \"const fs=require('fs'); fs.copyFileSync('dist/index.html','dist/404.html');\"",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",

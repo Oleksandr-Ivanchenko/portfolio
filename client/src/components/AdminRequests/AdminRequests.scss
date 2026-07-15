@@ -1,0 +1,197 @@
+@use '../../utils/vars';
+
+.admin-requests {
+  min-height: 100vh;
+  background: $color-bg;
+  color: $color-text;
+  font-family: $font-body;
+  padding: clamp(80px, 10vw, 140px) 24px 80px;
+
+  &__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    gap: 28px;
+  }
+
+  &__hero {
+    display: grid;
+    gap: 12px;
+  }
+
+  &__eyebrow {
+    font-family: $font-mono;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: $color-muted;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: clamp(34px, 5vw, 52px);
+    margin: 0;
+    line-height: 1;
+  }
+
+  &__text {
+    margin: 0;
+    max-width: 720px;
+    color: $color-muted;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  &__auth {
+    border: 1px solid $color-border;
+    background: $color-surface;
+    border-radius: 22px;
+    padding: 24px;
+    display: grid;
+    gap: 12px;
+    max-width: 420px;
+  }
+
+  &__auth-title {
+    margin: 0;
+    font-family: $font-display;
+    font-size: 24px;
+  }
+
+  &__auth-text {
+    margin: 0;
+    color: $color-muted;
+    line-height: 1.7;
+  }
+
+  &__input {
+    width: 100%;
+    border: 1px solid $color-border;
+    background: rgba(255,255,255,0.04);
+    color: $color-text;
+    border-radius: 12px;
+    padding: 0.82rem 0.95rem;
+    font: inherit;
+    outline: none;
+
+    &:focus {
+      border-color: rgba(78,205,196,0.45);
+      box-shadow: 0 0 0 3px rgba(78,205,196,0.12);
+    }
+  }
+
+  &__submit {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.9rem 1rem;
+    background: linear-gradient(135deg, $color-teal, $color-purple);
+    color: $color-bg;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+  }
+
+  &__state,
+  &__empty {
+    border: 1px solid $color-border;
+    background: $color-surface;
+    border-radius: 18px;
+    padding: 22px;
+    color: $color-muted;
+  }
+
+  &__state--error {
+    color: #ffb1b1;
+    border-color: rgba(255, 103, 103, 0.28);
+  }
+
+  &__grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  &__card {
+    border: 1px solid $color-border;
+    background: $color-surface;
+    border-radius: 22px;
+    padding: 22px;
+    display: grid;
+    gap: 14px;
+  }
+
+  &__card-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: start;
+  }
+
+  &__card-name {
+    margin: 0;
+    font-size: 20px;
+    font-family: $font-display;
+  }
+
+  &__card-email {
+    margin: 4px 0 0;
+    color: $color-muted;
+  }
+
+  &__card-date {
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $color-muted;
+    white-space: nowrap;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(78,205,196,0.14);
+    color: #8fe7db;
+    font-size: 12px;
+  }
+
+  &__pill--muted {
+    background: rgba(255,255,255,0.06);
+    color: $color-muted;
+  }
+
+  &__project-label {
+    margin: 0;
+    font-family: $font-mono;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: $color-muted;
+  }
+
+  &__project {
+    margin: 0;
+    line-height: 1.7;
+    color: $color-text;
+    white-space: pre-wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-requests {
+    padding-inline: 16px;
+
+    &__card-head {
+      flex-direction: column;
+    }
+  }
+}
