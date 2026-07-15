@@ -7,6 +7,8 @@ import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
 import Contact from './components/Contact/Contact';
 import Experience from "./components/Experience/Experience";
+import Collaboration from "./components/Collaboration/Collaboration";
+import AdminRequests from "./components/AdminRequests/AdminRequests";
 // import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 // import NotFound from "./components/NotFound/NotFound";
 
@@ -26,6 +28,8 @@ export default function App() {
         <Route path="/skills" element={<Skills />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/experience" element={<Experience />} />
+        <Route path="/collaboration" element={<Collaboration />} />
+        <Route path="/admin/requests" element={<AdminRequests />} />
         {/* <Route path="*" element={<NotFound />} />   */}
       </Routes>
       <Footer />

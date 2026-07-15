@@ -699,7 +699,7 @@ function FooterCTA() {
           </span>
         </h3>
         <a
-          href="mailto:hello@example.com"
+          href="/portfolio/collaboration"
           style={{
             display: "inline-flex",
             alignItems: "center",
